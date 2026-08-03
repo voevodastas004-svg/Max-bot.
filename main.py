@@ -34,7 +34,18 @@ async def testwelcome(ctx):
         "💬 Приємного спілкування та гарної гри!"
     )
 @bot.command()
-async def правила(ctx):@bot.command()
+async def правила(ctx):
+    await ctx.send(
+        "📜 **Правила сервера MAX FARMING UKRAINE**\n"
+        "1️⃣ Поважайте інших учасників.\n"
+        "2️⃣ Заборонені образи та токсична поведінка.\n"
+        "3️⃣ Не спамте.\n"
+        "4️⃣ Не рекламуйте сторонні сервери.\n"
+        "5️⃣ Дотримуйтесь правил адміністрації.\n"
+        "🚜 Гарної гри!"
+    )
+
+@bot.command()
 async def допомога(ctx):
     embed = discord.Embed(
         title="🤖 MAX BOT — Довідка",
