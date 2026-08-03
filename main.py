@@ -19,6 +19,16 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send("🏓 Pong! MAX BOT працює!")
+    await ctx.send("🏓 Pong! MAX BOT працює!")@bot.event
+async def on_member_join(member):
+    channel = discord.utils.get(member.guild.text_channels, name="👋│привітання")
+
+    if channel:
+        await channel.send(
+            f"🇺🇦 Вітаємо, {member.mention}!\n\n"
+            "🚜 Ласкаво просимо до **MAX FARMING UKRAINE**!\n\n"
+            "📖 Ознайомся з правилами сервера.\n"
+            "💬 Приємного спілкування та гарної гри!"
+        )
 
 bot.run(TOKEN)
