@@ -95,12 +95,45 @@ class TicketView(View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label="🎫 Створити тікет", style=discord.ButtonStyle.green)
-    async def create_ticket(self, button, interaction):
-        await interaction.response.send_message(
-            "✅ Функція тікетів скоро буде підключена!",
-            ephemeral=True
+@discord.ui.button(label="🎫 Створити тікет", style=discord.ButtonStyle.green)
+async def create_ticket(self, interaction: discord.Interaction, button: discord.ui.Button):
+
+    guild = interaction.guild
+
+    category = get(guild.categories, name="🎫 Тікети")
+
+    if category is None:
+        category = await guild.create_category("🎫 Тікети")
+
+    overwrites = {
+        guild.default_role: discord.PermissionOverwrite(view_channel=False),
+        interaction.user: discord.PermissionOverwrite(
+            view_channel=True,
+            send_messages=True,
+            read_message_history=True
+        ),
+        guild.me: discord.PermissionOverwrite(
+            view_channel=True,
+            send_messages=True,
+            manage_channels=True
         )
+    }
+
+    channel = await guild.create_text_channel(
+        f"ticket-{interaction.user.name}",
+        category=category,
+        overwrites=overwrites
+    )
+
+    await channel.send(
+        f"👋 {interaction.user.mention}\n\n"
+        "Опишіть вашу проблему, адміністрація відповість найближчим часом."
+    )
+
+    await interaction.response.send_message(
+        f"✅ Тікет створено: {channel.mention}",
+        ephemeral=True
+    )
 
 @bot.command()
 async def ticket(ctx):
