@@ -34,7 +34,41 @@ async def testwelcome(ctx):
         "💬 Приємного спілкування та гарної гри!"
     )
 @bot.command()
-async def правила(ctx):
+async def правила(ctx):@bot.command()
+async def допомога(ctx):
+    embed = discord.Embed(
+        title="🤖 MAX BOT — Довідка",
+        description="Ось список доступних команд:",
+        color=discord.Color.green()
+    )
+
+    embed.add_field(
+        name="🏓 !ping",
+        value="Перевірка роботи бота.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="👋 !testwelcome",
+        value="Показує тестове привітання.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="📜 !правила",
+        value="Показує правила сервера.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="❓ !допомога",
+        value="Показує список команд.",
+        inline=False
+    )
+
+    embed.set_footer(text="MAX FARMING UKRAINE 🚜")
+
+    await ctx.send(embed=embed)
     await ctx.send(
         "📜 **Правила сервера MAX FARMING UKRAINE**\n\n"
         "1️⃣ Поважайте інших учасників.\n"
