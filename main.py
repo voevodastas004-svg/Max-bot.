@@ -89,7 +89,26 @@ async def допомога(ctx):
         "5️⃣ Дотримуйтесь правил адміністрації.\n"
         "🚜 Гарної гри!"
     )
+class TicketView(View):
+    def __init__(self):
+        super().__init__(timeout=None)
 
+    @discord.ui.button(label="🎫 Створити тікет", style=discord.ButtonStyle.green)
+    async def create_ticket(self, button, interaction):
+        await interaction.response.send_message(
+            "✅ Функція тікетів скоро буде підключена!",
+            ephemeral=True
+        )
+
+@bot.command()
+async def ticket(ctx):
+    embed = discord.Embed(
+        title="🎫 Система тікетів",
+        description="Натисніть кнопку нижче, щоб створити тікет.",
+        color=discord.Color.blue()
+    )
+
+    await ctx.send(embed=embed, view=TicketView())
 @bot.event
 async def on_member_join(member):
     channel = discord.utils.get(
