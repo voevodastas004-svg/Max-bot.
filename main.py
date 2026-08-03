@@ -1,3 +1,4 @@
+
 import os
 import discord
 from discord.ext import commands
@@ -10,15 +11,21 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} успішно запущений!")
     await bot.change_presence(
-        activity=discord.Game(name="🚜 MAX FARMING UKRAINE")
+        activity=discord.Game(name="🚜 Farming Simulator")
     )
 
+
 @bot.command()
-async def ping(ctx):@bot.command()
+async def ping(ctx):
+    await ctx.send("🏓 Pong! MAX BOT працює!")
+
+
+@bot.command()
 async def testwelcome(ctx):
     await ctx.send(
         f"🇺🇦 Вітаємо, {ctx.author.mention}!\n\n"
@@ -26,9 +33,14 @@ async def testwelcome(ctx):
         "📖 Ознайомся з правилами сервера.\n"
         "💬 Приємного спілкування та гарної гри!"
     )
-    await ctx.send("🏓 Pong! MAX BOT працює!")@bot.event
+
+
+@bot.event
 async def on_member_join(member):
-    channel = discord.utils.get(member.guild.text_channels, name="👋│привітання")
+    channel = discord.utils.get(
+        member.guild.text_channels,
+        name="👋│привітання"
+    )
 
     if channel:
         await channel.send(
@@ -37,5 +49,6 @@ async def on_member_join(member):
             "📖 Ознайомся з правилами сервера.\n"
             "💬 Приємного спілкування та гарної гри!"
         )
+
 
 bot.run(TOKEN)
